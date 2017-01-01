@@ -4,13 +4,13 @@
 
 NEW microSD card install requirements
 =====================================
-Must be formated MS-DOS FAT32, iMac was able to nativelya new 64GB microSD.
+Must be formated MS-DOS FAT32, iMac was able to natively format a new 64GB microSD that was readable by the Pi
 
 Download NOOBS, extract and copy files over to new microSD
 
 INSTALL new Raspian image, Microsoft Windows 10 IoT
 ===================================================
-Use wired Ethernet. Will work w/wifi but wired config will be wrong after Raspian boots up.
+Use wired Ethernet. Will work w/wifi but wired config will be wrong after Raspian boots up if using wireless.
 
 Select images
 
@@ -25,7 +25,7 @@ goto /etc/wpa_supplicant and modify wpa_supplicant.conf file
 
 pi@raspberrypi:~ $ sudo nano wpa_supplicant.conf
 
-insert the following at the end of the file:
+insert the following at the end of the conf file:
 
 network={
     ssid="HOME-1A97"
