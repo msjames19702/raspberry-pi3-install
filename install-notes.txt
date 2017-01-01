@@ -1,0 +1,142 @@
+/////          \\\\\
+||||| 20161229 |||||
+\\\\\          /////
+
+NEW microSD card install requirements
+=====================================
+Must be formated MS-DOS FAT32, iMac was able to nativelya new 64GB microSD.
+
+Download NOOBS, extract and copy files over to new microSD
+
+INSTALL new Raspian image, Microsoft Windows 10 IoT
+===================================================
+Use wired Ethernet. Will work w/wifi but wired config will be wrong after Raspian boots up.
+
+Select images
+
+AFTER Raspian boots up
+======================
+goto start, preferences, Raspberry Pi Configuration and set all country and locale setting.
+
+reboot
+
+Must config wifi manually. 
+goto /etc/wpa_supplicant and modify wpa_supplicant.conf file
+
+pi@raspberrypi:~ $ sudo nano wpa_supplicant.conf
+
+insert the following at the end of the file:
+
+network={
+    ssid="HOME-1A97"
+    psk="WPA2 key"
+}
+
+SOUND
+=====
+had to use $sudo raspi-config, advanced options, audio to force signal to headphone jack or HDMI. As of yet haven't gotten sound to come out of the monitor speakers through HDMI.
+
+/////          \\\\\
+||||| 20161230 |||||
+\\\\\          /////
+
+UPDATE RASPIAN DISTRIBUTION
+===========================
+pi@raspberrypi:~ $ sudo apt-get update
+pi@raspberrypi:~ $ sudo apt-get dist-upgrade
+pi@raspberrypi:~ $ sudo apt-get install raspi-gpio (if needed)
+
+MORE SETTINGS ADJUSTMENTS FOR SOUND & VIDEO OVERSCAN
+====================================================
+pi@raspberrypi:~ $ sudo nano /boot/config.txt
+
+# uncomment to force a HDMI mode rather than DVI. This can make audio work in
+# DMT (computer monitor) modes
+hdmi_drive=2
+
+# uncomment the following to adjust overscan. Use positive numbers if console
+# goes off screen, and negative if there is too much border
+overscan_left=16
+overscan_right=16
+overscan_top=32
+overscan_bottom=32
+
+# uncomment to force a console size. By default it will be display's size minus
+# overscan.
+framebuffer_width=1360
+framebuffer_height=768
+
+NUMLOCK AT BOOTUP
+=================
+pi@raspberrypi:~ $ sudo apt-get install numlockx
+pi@raspberrypi:~ $ sudo nano /etc/lightdm/lightdm.conf
+find 
+#greeter-setup-script =
+and change to 
+greeter-setup-script = /usr/bin/numlockx on
+
+pi@raspberrypi:~ $ sudo nano /etc/xdg/lxsession/LXDE/autostart
+and add
+/usr/bin/numlockx on
+
+PRINTING
+========
+see http://www.penguintutor.com/linux/printing-cups
+
+pi@raspberrypi:~ $ sudo apt-get install cups
+pi@raspberrypi:~ $ sudo usermod -a -G lpadmin pi
+pi@raspberrypi:~ $ sudo apt-get install iceweasel (optional)
+
+CUPS printer admin page address: http://127.0.0.1:631/
+Note: used brother 9550 cdw print driver for 9330 cdw
+
+LibreOffice Writer printing to both printers (HP2420 & Brother 9330CDW).
+Raspbian Leafpad text editor printed to both, took a while to output.
+
+/////          \\\\\
+||||| 20161231 |||||
+\\\\\          /////
+
+ENABLED SSH
+===========
+https://www.raspberrypi.org/documentation/remote-access/ssh/
+https://www.modmypi.com/blog/remotely-accessing-the-raspberry-pi-via-ssh-console-mode
+http://unix.stackexchange.com/questions/126297/use-different-username-by-default-for-a-specific-host
+
+pi@raspberrypi:~ $ sudo raspi-config
+goto 5 Interfacing Options - > P2 Enable/Disable remote command line access
+follow prompts to start SSH server
+
+pi@raspberrypi:~ $ /etc/init.d/ssh status
+   ssh.service - OpenBSD Secure Shell server
+   Loaded: loaded (/lib/systemd/system/ssh.service; enabled)
+   Active: active (running) since Sat 2016-12-31 14:49:22 EST; 7min ago
+   Main PID: 19634 (sshd)
+   CGroup: /system.slice/ssh.service
+   19634 /usr/sbin/sshd -D
+pi@raspberrypi:~ $
+
+squark:~ mikejames$ ssh pi@10.0.0.17
+
+Or on the remote Linux or Mac client, add the following in your ~/.ssh/config file:
+  Host DNS or IP address
+    User pi
+
+  Host 10.0.0.17
+    User pi
+
+MORE ON PUTTY SETUP ON WINDOWS
+==============================
+https://www.modmypi.com/blog/remotely-accessing-the-raspberry-pi-via-ssh-console-mode
+
+ACCESSING THE PYTHON 3 INTERPRETER ON THE RASPBERRY PI 3
+========================================================
+pi@raspberrypi:~ $ python3
+Python 3.4.2 (default, Oct 19 2014, 13:31:11) 
+[GCC 4.9.1] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>exit() or Ctrl-D to exit
+pi@raspberrypi:~ $
+
+Reference on how to write and run a Python program on the Rasberry Pi
+http://www.circuitbasics.com/how-to-write-and-run-a-python-program-on-the-raspberry-pi/
