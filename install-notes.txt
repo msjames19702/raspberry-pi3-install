@@ -1,98 +1,14 @@
 /////          \\\\\
-||||| 20161229 |||||
+||||| 20170101 |||||
 \\\\\          /////
 
-For Raspberry Pi 3 Model B, Raspbian "Jessie" OS
-ref https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+A BETTER PDF READER THAN XPDF
+=============================
+Downloaded and instlled Okular
 
-NEW microSD card install requirements
-=====================================
-Must be formated MS-DOS FAT32, My iMac was able to natively format a new 64GB microSD that was readable by the Pi.
-
-Download NOOBS, extract and copy files over to new microSD
-<ref> https://www.raspberrypi.org/downloads/noobs/
-<ref> https://www.raspberrypi.org/documentation/installation/installing-images/README.md
-
-INSTALL new Raspian image, Microsoft Windows 10 IoT
-===================================================
-Insert microSD card into the Pi.
-Use wired Ethernet. Will work w/wifi but wired config will be wrong after Raspian boots up if using wireless.
-Select images.
-
-AFTER Raspian boots up
-======================
-goto start, preferences, Raspberry Pi Configuration and set all country and locale settings.
-pi@raspberrypi:~ $ sudo reboot
-
-WiFi
-====
-goto /etc/wpa_supplicant and modify wpa_supplicant.conf file
-pi@raspberrypi:~ $ sudo nano wpa_supplicant.conf
-insert the following at the end of the conf file:
-network={
-    ssid="HOME-1A97"
-    psk="WPA2 key"
-}
-<ref> https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
-
-SOUND
-=====
-had to use $sudo raspi-config, advanced options, audio to force signal to headphone jack or HDMI. As of yet haven't gotten sound to come out of the monitor speakers through HDMI. (fixed sound through HDMI issue below)
-
-/////          \\\\\
-||||| 20161230 |||||
-\\\\\          /////
-
-UPDATE RASPIAN DISTRIBUTION
-===========================
 pi@raspberrypi:~ $ sudo apt-get update
-pi@raspberrypi:~ $ sudo apt-get dist-upgrade
-pi@raspberrypi:~ $ sudo apt-get install raspi-gpio (if needed)
-
-MORE SETTINGS ADJUSTMENTS FOR SOUND & VIDEO OVERSCAN
-====================================================
-pi@raspberrypi:~ $ sudo nano /boot/config.txt
-
-# uncomment to force a HDMI mode rather than DVI. This can make audio work in
-# DMT (computer monitor) modes
-hdmi_drive=2
-
-# uncomment the following to adjust overscan. Use positive numbers if console
-# goes off screen, and negative if there is too much border
-overscan_left=16
-overscan_right=16
-overscan_top=32
-overscan_bottom=32
-
-# uncomment to force a console size. By default it will be display's size minus
-# overscan.
-framebuffer_width=1360
-framebuffer_height=768
-(20170101: looking for URL ref I grabbed this info from)
-
-NUMLOCK AT BOOTUP
-=================
-pi@raspberrypi:~ $ sudo apt-get install numlockx
-pi@raspberrypi:~ $ sudo nano /etc/lightdm/lightdm.conf
-  find #greeter-setup-script =
-  and change to greeter-setup-script = /usr/bin/numlockx on
-pi@raspberrypi:~ $ sudo nano /etc/xdg/lxsession/LXDE/autostart
-  and add /usr/bin/numlockx on
-<ref> https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=10081
-
-PRINTING
-========
-<ref> http://www.penguintutor.com/linux/printing-cups
-
-pi@raspberrypi:~ $ sudo apt-get install cups
-pi@raspberrypi:~ $ sudo usermod -a -G lpadmin pi
-pi@raspberrypi:~ $ sudo apt-get install iceweasel (optional)
-
-CUPS printer admin page address: http://127.0.0.1:631/
-Note: used brother 9550 cdw print driver for 9330 cdw
-
-LibreOffice Writer printing to both printers (HP2420 & Brother 9330CDW).
-Raspbian Leafpad text editor printed to both, took a while to output.
+pi@raspberrypi:~ $ sudo apt-get install okular
+ref: https://www.raspberrypi.org/forums/viewtopic.php?t=163168&p=1054931
 
 /////          \\\\\
 ||||| 20161231 |||||
@@ -143,13 +59,97 @@ Reference on how to write and run a Python program on the Rasberry Pi
 http://www.circuitbasics.com/how-to-write-and-run-a-python-program-on-the-raspberry-pi/
 
 /////          \\\\\
-||||| 20170101 |||||
+||||| 20161230 |||||
 \\\\\          /////
 
-A BETTER PDF READER THAN XPDF
-=============================
-Downloaded and instlled Okular
-
+UPDATE RASPIAN DISTRIBUTION
+===========================
 pi@raspberrypi:~ $ sudo apt-get update
-pi@raspberrypi:~ $ sudo apt-get install okular
-ref: https://www.raspberrypi.org/forums/viewtopic.php?t=163168&p=1054931
+pi@raspberrypi:~ $ sudo apt-get dist-upgrade
+pi@raspberrypi:~ $ sudo apt-get install raspi-gpio (if needed)
+
+MORE SETTINGS ADJUSTMENTS FOR SOUND & VIDEO OVERSCAN
+====================================================
+pi@raspberrypi:~ $ sudo nano /boot/config.txt
+
+# uncomment to force a HDMI mode rather than DVI. This can make audio work in
+# DMT (computer monitor) modes
+hdmi_drive=2
+
+# uncomment the following to adjust overscan. Use positive numbers if console
+# goes off screen, and negative if there is too much border
+overscan_left=16
+overscan_right=16
+overscan_top=32
+overscan_bottom=32
+
+# uncomment to force a console size. By default it will be display's size minus
+# overscan.
+framebuffer_width=1360
+framebuffer_height=768
+(20170101: looking for URL ref I grabbed this info from)
+
+NUMLOCK AT BOOTUP
+=================
+pi@raspberrypi:~ $ sudo apt-get install numlockx
+pi@raspberrypi:~ $ sudo nano /etc/lightdm/lightdm.conf
+  find #greeter-setup-script =
+  and change to greeter-setup-script = /usr/bin/numlockx on
+pi@raspberrypi:~ $ sudo nano /etc/xdg/lxsession/LXDE/autostart
+  and add /usr/bin/numlockx on
+<ref> https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=10081
+
+PRINTING
+========
+<ref> http://www.penguintutor.com/linux/printing-cups
+
+pi@raspberrypi:~ $ sudo apt-get install cups
+pi@raspberrypi:~ $ sudo usermod -a -G lpadmin pi
+pi@raspberrypi:~ $ sudo apt-get install iceweasel (optional)
+
+CUPS printer admin page address: http://127.0.0.1:631/
+Note: used brother 9550 cdw print driver for 9330 cdw
+
+LibreOffice Writer printing to both printers (HP2420 & Brother 9330CDW).
+Raspbian Leafpad text editor printed to both, took a while to output.
+
+/////          \\\\\
+||||| 20161229 |||||
+\\\\\          /////
+
+For Raspberry Pi 3 Model B, Raspbian "Jessie" OS
+ref https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
+
+NEW microSD card install requirements
+=====================================
+Must be formated MS-DOS FAT32, My iMac was able to natively format a new 64GB microSD that was readable by the Pi.
+
+Download NOOBS, extract and copy files over to new microSD
+<ref> https://www.raspberrypi.org/downloads/noobs/
+<ref> https://www.raspberrypi.org/documentation/installation/installing-images/README.md
+
+INSTALL new Raspian image, Microsoft Windows 10 IoT
+===================================================
+Insert microSD card into the Pi.
+Use wired Ethernet. Will work w/wifi but wired config will be wrong after Raspian boots up if using wireless.
+Select images.
+
+AFTER Raspian boots up
+======================
+goto start, preferences, Raspberry Pi Configuration and set all country and locale settings.
+pi@raspberrypi:~ $ sudo reboot
+
+WiFi
+====
+goto /etc/wpa_supplicant and modify wpa_supplicant.conf file
+pi@raspberrypi:~ $ sudo nano wpa_supplicant.conf
+insert the following at the end of the conf file:
+network={
+    ssid="HOME-1A97"
+    psk="WPA2 key"
+}
+<ref> https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
+
+SOUND
+=====
+had to use $sudo raspi-config, advanced options, audio to force signal to headphone jack or HDMI. As of yet haven't gotten sound to come out of the monitor speakers through HDMI. (fixed sound through HDMI issue on 20161230)
