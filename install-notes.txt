@@ -141,3 +141,15 @@ pi@raspberrypi:~ $
 
 Reference on how to write and run a Python program on the Rasberry Pi
 http://www.circuitbasics.com/how-to-write-and-run-a-python-program-on-the-raspberry-pi/
+
+/////          \\\\\
+||||| 20170101 |||||
+\\\\\          /////
+
+A BETTER PDF READER THAN XPDF
+=============================
+Downloaded and instlled Okular
+
+pi@raspberrypi:~ $ sudo apt-get update
+pi@raspberrypi:~ $ sudo apt-get install okular
+ref: https://www.raspberrypi.org/forums/viewtopic.php?t=163168&p=1054931
