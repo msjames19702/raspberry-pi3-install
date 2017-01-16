@@ -122,7 +122,7 @@ ref https://www.raspberrypi.org/products/raspberry-pi-3-model-b/
 
 NEW microSD card install requirements
 =====================================
-Must be formated MS-DOS FAT32, My iMac was able to natively format a new 64GB microSD that was readable by the Pi.
+Must be formated MS-DOS FAT32, My iMac was able to natively format a new 64GB microSD that was readable by the Pi. Even though the microSD card is 64GB, FAT32 will only format 32GB and the remainder will be unused. May try gparted to format the unused 32 GBs. So, for now I will only be using 32GB microSD cards.
 
 Download NOOBS, extract and copy files over to new microSD
 <ref> https://www.raspberrypi.org/downloads/noobs/
