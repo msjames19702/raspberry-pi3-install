@@ -126,7 +126,12 @@ Must be formated MS-DOS FAT32, My iMac was able to natively format a new 64GB mi
 Even though the microSD card is 64GB, FAT32 will only format 32GB and the remainder will be unused. 
 May try gparted to format the unused 32 GBs. So, for now I will only be using 32GB microSD cards.
 
-NOTE added 20170303: Even though I got Raspian installed and working on my Pi after formatting the microSD media using my Mac's disk utilities as mentioned above, later I found using that method to format microSD flash media has hidden restrictions pertaining to other projects I'm working on unrelated to installing Raspian on my Pi. I found good reason to follow the Pi Foundation's recommendation to use the SDFormatter application to format microSD flash media. I will eventually post notes of what I found in another project repository and post a reference link here when the material has been published.
+NOTE added 20170303: Even though I got Raspian installed and working on my Pi after formatting the microSD media using my
+Mac's disk utilities as mentioned above, later I found using that method to format microSD flash media has hidden
+restrictions pertaining to other projects I'm working on unrelated to installing Raspian on my Pi. I found good reason to
+follow the Pi Foundation's recommendation to use the SDFormatter application to format microSD flash media. I will
+eventually post notes of what I found in another project repository and post a reference link here when the material has
+been published.
 
 Download NOOBS, extract and copy files over to new microSD
 <ref> https://www.raspberrypi.org/downloads/noobs/
